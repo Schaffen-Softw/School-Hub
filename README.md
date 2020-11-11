@@ -33,8 +33,10 @@ $ flutter build apk --release
 
 ## Contributors
 - <a href="https://github.com/DhiranshSaxena">Dhiransh Saxena</a>
+- <a href="https://github.com/janhavitripurwar">Janhavi Tripurwar</a>
 - <a href="https://github.com/AwsmAsim">Asim Junaid</a>
 - <a href="https://github.com/aayeshanomani">Aayesha Nomani</a>
+
 
 ## License
 [![License](http://img.shields.io/:license-mit-blue.svg?style=flat-square)](http://badges.mit-license.org)
