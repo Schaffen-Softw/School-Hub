@@ -1,7 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:lottie/lottie.dart';
 import 'package:lpchub/BunkZone/bunkZone.dart';
 import 'package:lpchub/Circulars/Circulars.dart';
+import 'package:lpchub/Circulars/CircularsHome.dart';
 import 'package:lpchub/Confessions/ConfessHome.dart';
+import 'package:lpchub/DashBoard/Components/DailogBox1.dart';
+import 'package:lpchub/DashBoard/Components/DailogBox2.dart';
+import 'package:lpchub/DashBoard/Components/DialogBox3.dart';
+import 'package:lpchub/ImportantInfo/FirstInfo.dart';
 import 'package:lpchub/Interviews/interviews.dart';
 import 'package:lpchub/Memes/memes.dart';
 import 'package:lpchub/Mentor/ComingSoon.dart';
@@ -11,11 +18,16 @@ import 'package:lpchub/Mentor/home.dart';
 import 'package:lpchub/Notes/classSelect.dart';
 import 'package:lpchub/PreviousPapers/schools.dart';
 import 'package:lpchub/SignUp/UI/CurveDashboard.dart';
+import 'package:lpchub/UI/bottomSheets.dart';
 import 'package:lpchub/about.dart';
 import 'package:flutter/src/widgets/framework.dart';
+import 'package:lpchub/main.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 import '../helper.dart';
 import '../helper.dart';
+import 'Components/DailogBox.dart';
+
 
 class Dashboard extends StatefulWidget {
   @override
@@ -23,6 +35,7 @@ class Dashboard extends StatefulWidget {
 }
 
 class _DashboardState extends State<Dashboard> {
+
   @override
   void initState() {
     // TODO: implement initState
@@ -30,402 +43,472 @@ class _DashboardState extends State<Dashboard> {
     super.initState();
   }
 
+
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Color(0xffdae7e8),
       body: SingleChildScrollView(
-        child: Container(
-          height: MediaQuery.of(context).size.height,
-          width: MediaQuery.of(context).size.width,
-          child: SingleChildScrollView(
-            child: Column(
-              children: [
-                ClipPath(
-                  clipper: MyClipper2(),
-                  child: Container(
-                    width: 720,
-                    height: 300,
-                    decoration:
-                        BoxDecoration(color: Color(0xff104976), boxShadow: [
-                      BoxShadow(
-                        color: Colors.grey.withOpacity(0.5),
-                        spreadRadius: 5,
-                        blurRadius: 7,
-                        offset: Offset(0, 3), // changes position of shadow
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            SizedBox(
+              height: 20.0,
+            ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: [
+                    InkWell(
+                      onTap: (){
+                        HelperFunc.saveUserloggedIn(false);
+                        print("Logged out");
+                        Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context) => Splash()));
+                      },
+                      child: Container(
+                        child: IconButton(
+                          icon: Icon(FontAwesomeIcons.personBooth, color: Color(0xff4e5ed9)),
+                        ),
                       ),
-                    ]),
-                    child: Column(
-                      children: [
-                        SizedBox(
-                          height: 25,
-                        ),
-                        Container(
-                          child: Text(
-                            "DASHBOARD",
-                            style: TextStyle(
-                                fontFamily: 'MeriendaOne',
-                                color: Color(0xffE69494),
-                                fontSize: 23),
+                    ),
+                    Container(
+                     child: Text(
+                       "SCHOOLHUB",
+                       style: TextStyle(
+                             fontFamily: 'MeriendaOne',
+                             color: Color(0xff4e5ed9),
+                             fontSize: 27.0,
+                             shadows: [
+                               Shadow(
+                                   blurRadius: 3.0,
+                                   color: Colors.black,
+                                   offset: Offset(1.0,1.0)
+                               )
+                             ]
+                       ),
+                     )),
+                    // Container(
+                    //   child: IconButton(
+                    //     icon: Icon(FontAwesomeIcons.layerGroup, color: Color(0xff4e5ed9),),
+                    //   ),
+                    // )
+                    MyBottomSheet()
+                  ],
+                ),
+            SizedBox(
+              height: 20.0,
+            ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: [
+                    InkWell(
+                      onTap: (){
+                        // Navigator.push(context,
+                        //     PageRouteBuilder(
+                        //       transitionDuration: Duration(seconds: 2),
+                        //         transitionsBuilder: (BuildContext context, Animation<double> animation, Animation<double> secAnimation, Widget child){
+                        //
+                        //         animation = CurvedAnimation(parent: animation, curve: Curves.elasticInOut);
+                        //
+                        //         return ScaleTransition(scale: animation, child: child,alignment: Alignment.center,);
+                        //         },
+                        //         pageBuilder: (BuildContext context, Animation<double> animation, Animation<double> secAnimation){
+                        //           return FirstInfo();
+                        //         }
+                        //     ));
+                              showDialog(
+                                context: context,
+                                builder: (_) => FunkyOverlay(),
+                              );
+                      },
+                      borderRadius: BorderRadius.circular(50.0),
+                      child: Container(
+                        child: Container(
+                          width: 80.0,
+                          height: 80.0,
+                          decoration: BoxDecoration(
+                            boxShadow: [
+                              BoxShadow(
+                                  color: Colors.grey.withOpacity(0.5),
+                                  spreadRadius: 5,
+                                  blurRadius: 7,
+                                  offset: Offset(0, 3)
+                              )
+                            ],
+                              borderRadius: BorderRadius.circular(50.0),
+                              border: Border.all(color: Color(0xff4e5ed9), width: 2.0)
                           ),
-                        ),
-                        SizedBox(
-                          height: 25,
-                        ),
-                        Container(
-                          height: 200,
-                          width: 200,
-                          child: Image(
-                            image: AssetImage('asset/images/img2.png'),
+                          child: Container(
+                            decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(50.0),
+                                image: DecorationImage(
+                                    image: AssetImage('asset/images/info.png'),fit: BoxFit.cover
+                            ),
+                          ),
+                      ),
+                    ),
+                      )
+                    ),
+                    InkWell(
+                      onTap: (){
+                        showDialog(
+                          context: context,
+                          builder: (_) => FunkyOverlay2(),
+                        );
+                      },
+                        borderRadius: BorderRadius.circular(50.0),
+                        child: Container(
+                          child: Container(
+                            width: 80.0,
+                            height: 80.0,
+                            decoration: BoxDecoration(
+                                boxShadow: [
+                                  BoxShadow(
+                                      color: Colors.grey.withOpacity(0.5),
+                                      spreadRadius: 5,
+                                      blurRadius: 7,
+                                      offset: Offset(0, 3)
+                                  )
+                                ],
+                                borderRadius: BorderRadius.circular(50.0),
+                                border: Border.all(color: Color(0xff4e5ed9), width: 2.0)
+                            ),
+                            child: Container(
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(50.0),
+                                image: DecorationImage(
+                                    image: AssetImage('asset/images/info1.png'),fit: BoxFit.cover
+                                ),
+                              ),
+                            ),
                           ),
                         )
+                    ),
+                    InkWell(
+                      onTap: (){
+                        showDialog(
+                          context: context,
+                          builder: (_) => FunkyOverlay3(),
+                        );
+                      },
+                        borderRadius: BorderRadius.circular(50.0),
+                        child: Container(
+                          child: Container(
+                            width: 80.0,
+                            height: 80.0,
+                            decoration: BoxDecoration(
+                                boxShadow: [
+                                  BoxShadow(
+                                      color: Colors.grey.withOpacity(0.5),
+                                      spreadRadius: 5,
+                                      blurRadius: 7,
+                                      offset: Offset(0, 3)
+                                  )
+                                ],
+                                borderRadius: BorderRadius.circular(50.0),
+                                border: Border.all(color: Color(0xff4e5ed9), width: 2.0)
+                            ),
+                            child: Container(
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(50.0),
+                                image: DecorationImage(
+                                    image: AssetImage('asset/images/info2.png'),fit: BoxFit.cover
+                                ),
+                              ),
+                            ),
+                          ),
+                        )
+                    ),
+                    InkWell(
+                      onTap: (){
+                        showDialog(
+                          context: context,
+                          builder: (_) => FunkyOverlay4(),
+                        );
+                      },
+                        borderRadius: BorderRadius.circular(50.0),
+                        child: Container(
+                          child: Container(
+                            width: 80.0,
+                            height: 80.0,
+                            decoration: BoxDecoration(
+                                boxShadow: [
+                                  BoxShadow(
+                                      color: Colors.grey.withOpacity(0.5),
+                                      spreadRadius: 5,
+                                      blurRadius: 7,
+                                      offset: Offset(0, 3)
+                                  )
+                                ],
+                                borderRadius: BorderRadius.circular(50.0),
+                                border: Border.all(color: Color(0xff4e5ed9), width: 2.0)
+                            ),
+                            child: Container(
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(50.0),
+                                image: DecorationImage(
+                                    image: AssetImage('asset/images/info3.png'),fit: BoxFit.cover
+                                ),
+                              ),
+                            ),
+                          ),
+                        )
+                    ),
+                  ],
+                ),
+            SizedBox(
+              height: 30.0,
+            ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    InkWell(
+                      onTap: (){
+                        Navigator.push(context,
+                            PageRouteBuilder(
+                                transitionDuration: Duration(seconds: 2),
+                                transitionsBuilder: (BuildContext context, Animation<double> animation, Animation<double> secAnimation, Widget child){
+
+                                  animation = CurvedAnimation(parent: animation, curve: Curves.elasticInOut);
+
+                                  return ScaleTransition(scale: animation, child: child,alignment: Alignment.center,);
+                                },
+                                pageBuilder: (BuildContext context, Animation<double> animation, Animation<double> secAnimation){
+                                  return CircularsHome();
+                                }
+                            ));
+                      },
+                      child: Container(
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          children: [
+                            Container(
+                                child: Lottie.asset('asset/dailynews.json')
+                            ),
+                          ],
+                        ),
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(10.0),
+                              color: Color(0xFFB8d4ff),
+                              boxShadow: [
+                                BoxShadow(
+                                    color: const Color(0xeb000000),
+                                    blurRadius: 6)
+                              ]),
+                          width: 340,
+                          height: 190,
+                        ),
+                    ),
+                  ],
+                ),
+            SizedBox(
+              height: 20.0,
+            ),
+            // Row(
+            //   mainAxisAlignment: MainAxisAlignment.center,
+            //   children: [
+            //     Container(
+            //       child: Lottie.asset('asset/check.json'),
+            //       decoration: BoxDecoration(
+            //           borderRadius: BorderRadius.circular(10.0),
+            //           color: Colors.white,
+            //           boxShadow: [
+            //             BoxShadow(
+            //                 color: const Color(0xeb000000),
+            //                 blurRadius: 6)
+            //           ]),
+            //       width: 160,
+            //       height: 190,
+            //     ),
+            //     SizedBox(
+            //       width: 20,
+            //     ),
+            //     Container(
+            //       decoration: BoxDecoration(
+            //           borderRadius: BorderRadius.circular(10.0),
+            //           color: Color(0xFFe1bfbf),
+            //           boxShadow: [
+            //             BoxShadow(
+            //                 color: const Color(0xeb000000),
+            //                 blurRadius: 6)
+            //           ]),
+            //       width: 160,
+            //       height: 190,
+            //     ),
+            //   ],
+            // ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                InkWell(
+                  onTap: (){
+                    Navigator.push(context,
+                        PageRouteBuilder(
+                            transitionDuration: Duration(seconds: 2),
+                            transitionsBuilder: (BuildContext context, Animation<double> animation, Animation<double> secAnimation, Widget child){
+
+                              animation = CurvedAnimation(parent: animation, curve: Curves.elasticInOut);
+
+                              return ScaleTransition(scale: animation, child: child,alignment: Alignment.center,);
+                            },
+                            pageBuilder: (BuildContext context, Animation<double> animation, Animation<double> secAnimation){
+                              return Interviews();
+                            }
+                        ));
+                  },
+                  child: Container(
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Container(
+                            child: Lottie.asset('asset/mentor.json')
+                        ),
                       ],
                     ),
+                    decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(10.0),
+                        color: Colors.white,
+                        boxShadow: [
+                          BoxShadow(
+                              color: const Color(0xeb000000),
+                              blurRadius: 6)
+                        ]),
+                    width: 340,
+                    height: 190,
                   ),
                 ),
+              ],
+            ),
+            SizedBox(
+              height: 20.0,
+            ),
+            Row(
+              children: [
                 SizedBox(
-                  height: 20,
+                  width: 20,
                 ),
-                SingleChildScrollView(
-                  child: Container(
-                    child: Column(
-                      children: [
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            SizedBox(
-                              width: 30,
-                            ),
-                            InkWell(
-                              onTap: () {
-                                Navigator.of(context).push(MaterialPageRoute(
-                                  builder: (context) => Circulars(),
-                                ));
-                              },
-                              child: Container(
-                                decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.circular(15.0),
-                                    color: Color(0xff104976),
-                                    boxShadow: [
-                                      BoxShadow(
-                                          color: const Color(0xeb000000),
-                                          blurRadius: 6)
-                                    ]),
-                                width: 140,
-                                height: 120,
-                                child: Center(
-                                  child: Text(
-                                    "CIRCULAR",
-                                    style: TextStyle(
-                                        color: Color(0xffE69494),
-                                        fontSize: 20,
-                                        fontFamily: 'MeriendaOne'),
-                                  ),
-                                ),
-                              ),
-                            ),
-                            SizedBox(
-                              width: 40,
-                            ),
-                            InkWell(
-                              onTap: () {
-                                Navigator.of(context).push(MaterialPageRoute(
-                                  builder: (context) => Schools(),
-                                ));
-                              },
-                              child: Container(
-                                decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.circular(15.0),
-                                    color: Color(0xff104976),
-                                    boxShadow: [
-                                      BoxShadow(
-                                          color: const Color(0xeb000000),
-                                          blurRadius: 6)
-                                    ]),
-                                width: 140,
-                                height: 120,
-                                child: Center(
-                                  child: Text(
-                                    "PREVIOUS YEARS PAPERS",
-                                    textAlign: TextAlign.center,
-                                    style: TextStyle(
-                                        color: Color(0xffE69494),
-                                        fontSize: 20,
-                                        fontFamily: 'MeriendaOne'),
-                                  ),
-                                ),
-                              ),
-                            ),
-                            SizedBox(
-                              width: 30,
-                            )
-                          ],
-                        ),
-                        SizedBox(
-                          height: 30,
-                        ),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            SizedBox(
-                              width: 30,
-                            ),
-                            InkWell(
-                              onTap: () {
-                                Navigator.of(context).push(MaterialPageRoute(
-                                  builder: (context) => Interviews(),
-                                ));
-                              },
-                              child: Container(
-                                decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.circular(15.0),
-                                    color: Color(0xff104976),
-                                    boxShadow: [
-                                      BoxShadow(
-                                          color: const Color(0xeb000000),
-                                          blurRadius: 6)
-                                    ]),
-                                width: 140,
-                                height: 120,
-                                child: Center(
-                                  child: Text(
-                                    "SCHOOL STORIES",
-                                    textAlign: TextAlign.center,
-                                    style: TextStyle(
-                                        color: Color(0xffE69494),
-                                        fontSize: 20,
-                                        fontFamily: 'MeriendaOne'),
-                                  ),
-                                ),
-                              ),
-                            ),
-                            SizedBox(
-                              width: 40,
-                            ),
-                            InkWell(
-                              onTap: () {
-                                Navigator.of(context).push(MaterialPageRoute(
-                                  builder: (context) => Memes(),
-                                ));
-                              },
-                              child: Container(
-                                decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.circular(15.0),
-                                    color: Color(0xff104976),
-                                    boxShadow: [
-                                      BoxShadow(
-                                          color: const Color(0xeb000000),
-                                          blurRadius: 6)
-                                    ]),
-                                width: 140,
-                                height: 120,
-                                child: Center(
-                                  child: Text(
-                                    "MEMES",
-                                    textAlign: TextAlign.center,
-                                    style: TextStyle(
-                                        color: Color(0xffE69494),
-                                        fontSize: 20,
-                                        fontFamily: 'MeriendaOne'),
-                                  ),
-                                ),
-                              ),
-                            ),
-                            SizedBox(
-                              width: 30,
-                            )
-                          ],
-                        ),
-                        SizedBox(
-                          height: 30,
-                        ),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            SizedBox(
-                              width: 30,
-                            ),
-                            InkWell(
-                              onTap: () {
-                                Navigator.of(context).push(MaterialPageRoute(
-                                  builder: (context) => Confession(),
-                                ));
-                              },
-                              child: Container(
-                                decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.circular(15.0),
-                                    color: Color(0xff104976),
-                                    boxShadow: [
-                                      BoxShadow(
-                                          color: const Color(0xeb000000),
-                                          blurRadius: 6)
-                                    ]),
-                                width: 140,
-                                height: 120,
-                                child: Center(
-                                  child: Text(
-                                    "CONFESSIONS",
-                                    style: TextStyle(
-                                        color: Color(0xffE69494),
-                                        fontSize: 18,
-                                        fontFamily: 'MeriendaOne'),
-                                  ),
-                                ),
-                              ),
-                            ),
-                            SizedBox(
-                              width: 40,
-                            ),
-                            InkWell(
-                              onTap: () {
-                                Navigator.of(context).push(MaterialPageRoute(
-                                  builder: (context) => BunkZone(),
-                                ));
-                              },
-                              child: Container(
-                                decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.circular(15.0),
-                                    color: Color(0xff104976),
-                                    boxShadow: [
-                                      BoxShadow(
-                                          color: const Color(0xeb000000),
-                                          blurRadius: 6)
-                                    ]),
-                                width: 140,
-                                height: 120,
-                                child: Center(
-                                  child: Text(
-                                    "BUNK ZONE",
-                                    textAlign: TextAlign.center,
-                                    style: TextStyle(
-                                        color: Color(0xffE69494),
-                                        fontSize: 20,
-                                        fontFamily: 'MeriendaOne'),
-                                  ),
-                                ),
-                              ),
-                            ),
-                            SizedBox(
-                              width: 30,
-                            )
-                          ],
-                        ),
-                        SizedBox(
-                          height: 30,
-                        ),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            SizedBox(
-                              width: 30,
-                            ),
-                            InkWell(
-                              onTap: () {
-                                showDialog(
-                                    context: context,
-                                  builder: (context){
-                                      return AlertDialog(
-                                        elevation: 12.0,
-                                        shape: RoundedRectangleBorder(
-                                          borderRadius: BorderRadius.circular(10.0),
-                                        ),
-                                        backgroundColor: Color(0xFF4563DB),
-                                        title: Text(
-                                          "Coming Shortly!",
-                                          style: TextStyle(color: Colors.white),
-                                        ),
-                                        content: Text(
-                                          "We are always there for you to bring all the features for your help in Daily School life. Therefore, Coming Shortly, a ChatBox filled with plenty of Students to Chat and ask queries.",
-                                          style: TextStyle(color: Colors.white),
-                                        ),
-                                        actions: <Widget>[
-                                          RaisedButton(
-                                            color: Color(0xFF5036D5),
-                                            child: Text(
-                                              "Come Back Later",
-                                              style: TextStyle(color: Colors.white),
-                                            ),
-                                            onPressed: () {
-                                              Navigator.of(context).pop();
-                                            },
-                                          ),
-
-                                        ],
-                                      );
-                                  }
-
-                                );
-                              },
-                              child: Container(
-                                decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.circular(15.0),
-                                    color: Color(0xff104976),
-                                    boxShadow: [
-                                      BoxShadow(
-                                          color: const Color(0xeb000000),
-                                          blurRadius: 6)
-                                    ]),
-                                width: 140,
-                                height: 120,
-                                child: Center(
-                                  child: Text(
-                                    "DISCUSSION BOX",
-                                    textAlign: TextAlign.center,
-                                    style: TextStyle(
-                                        color: Color(0xffE69494),
-                                        fontSize: 20,
-                                        fontFamily: 'MeriendaOne'),
-                                  ),
-                                ),
-                              ),
-                            ),
-                            SizedBox(
-                              width: 40,
-                            ),
-                            InkWell(
-                              onTap: () {
-                                Navigator.of(context).push(MaterialPageRoute(
-                                  builder: (context) => About(),
-                                ));
-                              },
-                              child: Container(
-                                decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.circular(15.0),
-                                    color: Color(0xff104976),
-                                    boxShadow: [
-                                      BoxShadow(
-                                          color: const Color(0xeb000000),
-                                          blurRadius: 6)
-                                    ]),
-                                width: 140,
-                                height: 120,
-                                child: Center(
-                                  child: Text(
-                                    "SETTINGS",
-                                    textAlign: TextAlign.center,
-                                    style: TextStyle(
-                                        color: Color(0xffE69494),
-                                        fontSize: 20,
-                                        fontFamily: 'MeriendaOne'),
-                                  ),
-                                ),
-                              ),
-                            ),
-                            SizedBox(
-                              width: 30,
-                            ),
-                          ],
-                        ),
-                        SizedBox(
-                          height: 20,
-                        ),
-                      ],
+                Container(
+                  decoration: BoxDecoration(
+                    gradient: new LinearGradient(colors: [
+                      Color(0xff4e5ed9),
+                      Color(0xff4e5ed9),
+                    ],
+                        begin: const FractionalOffset(0.0, 0.0),
+                        end: const FractionalOffset(1.0, 1.0),
+                        stops: [0.0, 3.0],
+                        tileMode: TileMode.clamp
+                    ),
+                  ),
+                  width: 350.0,
+                  height: 1.0,
+                ),
+              ],
+            ),
+            SizedBox(
+              height: 10.0,
+            ),
+            Row(
+              children: [
+                SizedBox(
+                  width: 25,
+                ),
+                Container(
+                  child: Text('SOON ON SCHOOLHUB',
+                    style: TextStyle(
+                      color: Color(0xff4e5ed9),
+                      fontSize: 16,
+                      fontFamily: 'MeriendaOne',
+                        shadows: [
+                          Shadow(
+                              blurRadius: 1.0,
+                              color: Colors.black,
+                              offset: Offset(0.5,0.5)
+                          )
+                        ]
                     ),
                   ),
                 ),
               ],
             ),
-          ),
-        ),
+            SizedBox(
+              height: 20.0,
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Container(
+                  child: Lottie.asset('asset/resource.json'),
+                  decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(10.0),
+                      color: Colors.white,
+                      boxShadow: [
+                        BoxShadow(
+                            color: const Color(0xeb000000),
+                            blurRadius: 6)
+                      ]),
+                  width: 160,
+                  height: 190,
+                ),
+                SizedBox(
+                  width: 20,
+                ),
+                Container(
+                  child: Lottie.asset('asset/chatting.json'),
+                  decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(10.0),
+                      color: Colors.white,
+                      boxShadow: [
+                        BoxShadow(
+                            color: const Color(0xeb000000),
+                            blurRadius: 6)
+                      ]),
+                  width: 160,
+                  height: 190,
+                ),
+              ],
+            ),
+            SizedBox(
+              height: 20.0,
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Container(
+                  child: Lottie.asset('asset/bunkzone.json'),
+                  decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(10.0),
+                      color: Colors.white,
+                      boxShadow: [
+                        BoxShadow(
+                            color: const Color(0xeb000000),
+                            blurRadius: 6)
+                      ]),
+                  width: 160,
+                  height: 190,
+                ),
+                SizedBox(
+                  width: 20,
+                ),
+                Container(
+                  child: Lottie.asset('asset/plane.json'),
+                  decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(10.0),
+                      color: Colors.white,
+                      boxShadow: [
+                        BoxShadow(
+                            color: const Color(0xeb000000),
+                            blurRadius: 6)
+                      ]),
+                  width: 160,
+                  height: 190,
+                ),
+              ],
+            ),
+            SizedBox(
+              height: 20.0,
+            ),
+              ],
+        )
       ),
     );
   }

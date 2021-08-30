@@ -66,8 +66,8 @@ class _ConfessionState extends State<Confession> {
           ),
         ),
         floatingActionButton: Container(
-          height: 150,
-          width: 150,
+          height: 60,
+          width: 60,
           child: FloatingActionButton(
             backgroundColor: Color(0xffE69494),
             onPressed: (){

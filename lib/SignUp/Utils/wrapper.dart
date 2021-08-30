@@ -14,7 +14,7 @@ class Wrapper extends StatefulWidget {
 }
 
 class _WrapperState extends State<Wrapper> {
-  bool isLogged;
+  bool isLogged = false;
 
   ready() async {
     await HelperFunc.getUserloggedIn().then((value) {
@@ -33,6 +33,6 @@ class _WrapperState extends State<Wrapper> {
 
   @override
   Widget build(BuildContext context) {
-    return isLogged == null ? Landing() : isLogged ? Dashboard() : Landing();
+    return isLogged == null ? Loading() : isLogged ? Dashboard() : Landing();
   }
 }

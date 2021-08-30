@@ -1,46 +1,16 @@
-<p align="center"><a href="https://www.schaffensofts.com" target="_blank"><img src="https://i.postimg.cc/ZRBk4xZs/logo.png" title="Schaffen Softwares" alt="Schaffen Softwares"></a>
-</p>
+# SchoolHub
 
-# School-Hub App
+An Android Application for Students by Students.
 
-> An Application for Students by Students.
-> School-Hub is an Android Application which is developed using Flutter as Front-End and Firebase as Backend. This Android Application is contains all the all required features that will help student in solution of queries that a School Students faces in his/her Daily Life.
+## Getting Started
 
----
-[![DOCS](https://img.shields.io/badge/Documentation-see%20docs-green?style=flat-square&logo=appveyor)](INSERT_LINK_FOR_DOCS_HERE) 
-  [![UI ](https://img.shields.io/badge/User%20Interface-Link%20to%20UI-orange?style=flat-square&logo=appveyor)](INSERT_UI_LINK_HERE)
+This project is a starting point for a Flutter application.
 
-## Features
-- Notices of Schools that are circulated.
-- Previous Years Papers of Schools.
-- Weekly Interviews of Schools Alumni
-- Memes on Subjects and Education System, So that Students can get a clear concept of Subjects while having fun.
-- A Discussion Box to post your queries or solve one.
+A few resources to get you started if this is your first Flutter project:
 
-## Screenshots
-<img src="" alt="Project Screenshots">
-<img src="" alt="Project Screenshots">
-<img src="" alt="Project Screenshots">
+- [Lab: Write your first Flutter app](https://flutter.dev/docs/get-started/codelab)
+- [Cookbook: Useful Flutter samples](https://flutter.dev/docs/cookbook)
 
-## Instructions to run
-```
-$ git clone https://github.com/SchaffenSoftwares/<Project>
-$ cd <Project>
-$ flutter packages get
-$ flutter run
-$ flutter build apk --release
-```
-
-## Contributors
-- <a href="https://github.com/DhiranshSaxena">Dhiransh Saxena</a>
-- <a href="https://github.com/janhavitripurwar">Janhavi Tripurwar</a>
-- <a href="https://github.com/AwsmAsim">Asim Junaid</a>
-- <a href="https://github.com/aayeshanomani">Aayesha Nomani</a>
-
-
-## License
-[![License](http://img.shields.io/:license-mit-blue.svg?style=flat-square)](http://badges.mit-license.org)
-
-<p align="center">
-	With :heart: by <a href="https://www.schaffensofts.com" target="_blank">Schaffen Softwares</a>
-</p>
+For help getting started with Flutter, view our
+[online documentation](https://flutter.dev/docs), which offers tutorials,
+samples, guidance on mobile development, and a full API reference.
